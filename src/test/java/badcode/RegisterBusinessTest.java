@@ -69,4 +69,22 @@ class RegisterBusinessTest {
         );
         assertEquals("Email is required.", exception.getMessage());
     }
+
+    @Test
+    @DisplayName("Speaker doesn't meet standard rules ดังนั้นจะโยน ArgumentNullException ออกมา" +
+            "พร้อมกับคำว่า Speaker doesn't meet our standard rules.")
+    void case05() {
+        RegisterBusiness business = new RegisterBusiness();
+        // Prepare
+        Speaker speaker = new Speaker();
+        speaker.setFirstName("Yuranan");
+        speaker.setLastName("Charoen-ngarm");
+        speaker.setEmail("abc@amail.com");
+        // Assert exception with JUnit 5?
+        Exception exception = assertThrows(SpeakerDoesntMeetRequirementsException.class, () ->{
+                    business.register(null , speaker);
+                }
+        );
+        assertEquals("Speaker doesn't meet our standard rules.", exception.getMessage());
+    }
 }
