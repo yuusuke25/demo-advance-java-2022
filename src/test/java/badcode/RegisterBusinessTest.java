@@ -15,7 +15,7 @@ class RegisterBusinessTest {
 
         // Assert exception with JUnit 5?
         Exception exception = assertThrows(RuntimeException.class, () ->{
-                    business.register(null , null);
+                    null.register(null, business);
                 }
         );
 
@@ -30,7 +30,7 @@ class RegisterBusinessTest {
 
         // Assert exception with JUnit 5?
         Exception exception = assertThrows(ArgumentNullException.class, () ->{
-                    business.register(null , new Speaker());
+                    new Speaker().register(null, business);
                 }
         );
 
@@ -47,7 +47,7 @@ class RegisterBusinessTest {
         speaker.setFirstName("Yuranan");
         // Assert exception with JUnit 5?
         Exception exception = assertThrows(ArgumentNullException.class, () ->{
-                    business.register(null , speaker);
+                    speaker.register(null, business);
                 }
         );
         assertEquals("Last name is required.", exception.getMessage());
@@ -64,7 +64,7 @@ class RegisterBusinessTest {
         speaker.setLastName("Charoen-ngarm");
         // Assert exception with JUnit 5?
         Exception exception = assertThrows(ArgumentNullException.class, () ->{
-                    business.register(null , speaker);
+                    speaker.register(null, business);
                 }
         );
         assertEquals("Email is required.", exception.getMessage());
@@ -82,7 +82,7 @@ class RegisterBusinessTest {
         speaker.setEmail("abc@amail.com");
         // Assert exception with JUnit 5?
         Exception exception = assertThrows(SpeakerDoesntMeetRequirementsException.class, () ->{
-                    business.register(null , speaker);
+                    speaker.register(null, business);
                 }
         );
         assertEquals("Speaker doesn't meet our standard rules.", exception.getMessage());
@@ -100,7 +100,7 @@ class RegisterBusinessTest {
         speaker.setEmail("abc@gmail.com");
         // Assert exception with JUnit 5?
         Exception exception = assertThrows(SaveSpeakerException.class, () ->{
-                    business.register(null , speaker);
+                    speaker.register(null, business);
                 }
         );
         assertEquals("Can't save a speaker.", exception.getMessage());
@@ -118,7 +118,7 @@ class RegisterBusinessTest {
         speaker.setEmail("abc");
         // Assert exception with JUnit 5?
         Exception exception = assertThrows(DomainEmailInvalidException.class, () ->{
-                    business.register(null , speaker);
+                    speaker.register(null, business);
                 }
         );
         //assertEquals("Can't save a speaker.", exception.getMessage());
