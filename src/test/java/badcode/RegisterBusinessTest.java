@@ -71,7 +71,7 @@ class RegisterBusinessTest {
     }
 
     @Test
-    @DisplayName("Speaker doesn't meet standard rules ดังนั้นจะโยน ArgumentNullException ออกมา" +
+    @DisplayName("email invalid domain ดังนั้นจะโยน ArgumentNullException ออกมา" +
             "พร้อมกับคำว่า Speaker doesn't meet our standard rules.")
     void case05() {
         RegisterBusiness business = new RegisterBusiness();
@@ -86,5 +86,23 @@ class RegisterBusinessTest {
                 }
         );
         assertEquals("Speaker doesn't meet our standard rules.", exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("SpeakerRepository is null ดังนั้นจะโยน ArgumentNullException ออกมา" +
+            "พร้อมกับคำว่า Can't save a speaker.")
+    void case06() {
+        RegisterBusiness business = new RegisterBusiness();
+        // Prepare
+        Speaker speaker = new Speaker();
+        speaker.setFirstName("Yuranan");
+        speaker.setLastName("Charoen-ngarm");
+        speaker.setEmail("abc@gmail.com");
+        // Assert exception with JUnit 5?
+        Exception exception = assertThrows(SaveSpeakerException.class, () ->{
+                    business.register(null , speaker);
+                }
+        );
+        assertEquals("Can't save a speaker.", exception.getMessage());
     }
 }
