@@ -24,27 +24,16 @@ public class RegisterBusiness {
         String[] domains = {"gmail.com", "live.com"};
 
         if(speaker == null) throw new RuntimeException("Speaker is null");
-
-        if (isNullOrEmpty(speaker.getFirstName())) {
-            throw new ArgumentNullException("First name is required.");
-        }
-        if (isNullOrEmpty(speaker.getLastName())) {
-            throw new ArgumentNullException("Last name is required.");
-        }
-        if (isNullOrEmpty(speaker.getEmail())) {
-            throw new ArgumentNullException("Email is required.");
-        }
-
-        // Your Tasks ...
+        // Common
+        speaker.validate();
+        // Email
         String emailDomain = getEmailDomain(speaker.getEmail()); // Avoid ArrayIndexOutOfBound
         if (Arrays.stream(domains).filter(it -> it.equals(emailDomain)).count() != 1) {
             throw new SpeakerDoesntMeetRequirementsException("Speaker doesn't meet our standard rules.");
         }
     }
 
-    private boolean isNullOrEmpty(String input) {
-        return input == null || input.trim().equals("");
-    }
+
 
     int getFee(int experienceYear) {
         int fee = 0;

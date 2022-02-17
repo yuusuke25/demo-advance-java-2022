@@ -75,4 +75,20 @@ public class Speaker {
     public void setCertifications(List<String> certifications) {
         this.certifications = certifications;
     }
+
+    public void validate() {
+        if (isNullOrEmpty(firstName)) {
+            throw new ArgumentNullException("First name is required.");
+        }
+        if (isNullOrEmpty(lastName)) {
+            throw new ArgumentNullException("Last name is required.");
+        }
+        if (isNullOrEmpty(email)) {
+            throw new ArgumentNullException("Email is required.");
+        }
+    }
+
+    private boolean isNullOrEmpty(String input) {
+        return input == null || input.trim().equals("");
+    }
 }
