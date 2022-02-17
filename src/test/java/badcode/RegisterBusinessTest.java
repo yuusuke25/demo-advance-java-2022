@@ -36,4 +36,20 @@ class RegisterBusinessTest {
 
         assertEquals("First name is required.", exception.getMessage());
     }
+
+    @Test
+    @DisplayName("Last name = null ดังนั้นจะโยน ArgumentNullException ออกมา" +
+            "พร้อมกับคำว่า Last name is required.")
+    void case03() {
+        RegisterBusiness business = new RegisterBusiness();
+        // Prepare
+        Speaker speaker = new Speaker();
+        speaker.setFirstName("Yuranan");
+        // Assert exception with JUnit 5?
+        Exception exception = assertThrows(ArgumentNullException.class, () ->{
+                    business.register(null , speaker);
+                }
+        );
+        assertEquals("Last name is required.", exception.getMessage());
+    }
 }
